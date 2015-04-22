@@ -1,5 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    Homepage.
+
+<strong>// This works</strong>
+<pre>
+$fileConstraint1 = new Constraints\File(['maxSize' => '1M']);
+</pre>
+{{ dump(errors1) }}
+
+<hr />
+
+<strong>// This works too</strong>
+<pre>
+$fileConstraint2 = new Constraints\File();
+$fileConstraint2->maxSize = '1000000';
+</pre>
+{{ dump(errors2) }}
+
+<hr />
+
+<strong>// This used to work in 2.5.x but crashes since 2.6.0</strong>
+<pre>
+$fileConstraint3 = new Constraints\File();
+$fileConstraint3->maxSize = '1M';
+</pre>
+{{ dump(errors3) }}
 {% endblock %}
